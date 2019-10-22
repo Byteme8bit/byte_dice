@@ -26,17 +26,20 @@ def get_dice_input():
     return d, t
 
 
-def roll_dice(d=None, t=None):
+def roll_dice(d=None, t=None, r=None):
+
+    # Checks for override, grabs user input if no overrides
     dice, total_sides = get_dice_input() if not d and not t else d, t
 
     # Main loop
     while True:
 
+        # Splats list created by looping "dice" times and selecting random numbers in range 1 - "total_sides"
         print("\n", *[randint(1, int(total_sides)) for i in range(int(dice))], "\n")
 
         # Asks user if program should repeat same parameters or use new ones
         after_results = input("\nWould you like to repeat this simulation or change the parameters?:\n"
-                              "[R]epeat   |   [C]hange   |   [Q]uit\n").lower()
+                              "[R]epeat   |   [C]hange   |   [Q]uit\n").lower() if not r else r
 
         # Input verification to ensure user provides a valid response
         while after_results not in "rcq" or len(after_results) > 1:
