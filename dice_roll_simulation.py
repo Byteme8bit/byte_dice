@@ -6,14 +6,25 @@ __author__ = "byteme8bit"
 import random
 
 # Total number of dice
-dice = input("How many dice would you like to roll?:\n")
+dice = input("\nHow many dice would you like to roll?:\n")
+
+# Input verification to ensure user provides a number
+while not dice.isnumeric():
+    print("\nPlease input a digit (e.g. 1, 3, 574, etc.)")
+    dice = input("\nHow many dice would you like to roll?:\n")
 
 # Total number of sides for dice
-total_sides = input("How many sides should each dice have?:\n")
+total_sides = input("\nHow many sides should each dice have?:\n")
+
+# Input verification to ensure user provides a number
+while not total_sides.isnumeric():
+    print("\nPlease input a digit (e.g. 1, 3, 574, etc.)")
+    total_sides = input("\nHow many sides should each dice have?:\n")
 
 # Main loop
 while True:
 
+    print()
     # Empty list to contain results
     results = []
 
@@ -27,18 +38,36 @@ while True:
     print(*results)
 
     # Asks user if program should repeat same parameters or use new ones
-    after_results = input("Would you like to repeat this simulation or change the parameters?:\n"
-                          "[R]epeat   |   [C]hange   |   [Q]uit")
+    after_results = input("\nWould you like to repeat this simulation or change the parameters?:\n"
+                          "[R]epeat   |   [C]hange   |   [Q]uit\n").lower()
+
+    # Input verification to ensure user provides a valid response
+    while after_results not in "rcq" or len(after_results) > 1:
+        print("\nPlease select valid answer r - c - q")
+        after_results = input("\nWould you like to repeat this simulation or change the parameters?:\n"
+                              "[R]epeat   |   [C]hange   |   [Q]uit\n").lower()
+
+    # If user chooses to change parameters
+    if after_results == 'c':
+
+        # Total number of dice
+        dice = input("How many dice would you like to roll?:\n")
+
+        while not dice.isnumeric():
+            print("Please input a numeric\n")
+            dice = input("How many dice would you like to roll?:\n")
+
+        # Total number of sides for dice
+        total_sides = input("How many sides should each dice have?:\n")
+
+        while not total_sides.isnumeric():
+            print("Please input a numeric\n")
+            total_sides = input("How many sides should each dice have?:\n")
 
     # If user chooses to repeat
-    if after_results == 'R' or 'r':
+    elif after_results == 'r':
         continue
 
     # If user chooses to quit program
-    elif after_results == 'Q' or 'q':
-        quit(8)
-
-    # If user chooses to change parameters
     else:
-        dice = input("How many dice would you like to roll?:\n")
-        total_sides = input("How many sides should each dice have?:\n")
+        quit(8)
