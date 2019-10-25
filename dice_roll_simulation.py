@@ -29,7 +29,11 @@ def get_dice_input():
 def roll_dice(d=None, t=None, r=None):
 
     # Checks for override, grabs user input if no overrides
-    dice, total_sides = get_dice_input() if not d and not t else d, t
+    dice = d if not d else d
+    total_sides = t if not t else t
+
+    if not d and not t:
+        dice, total_sides = get_dice_input()
 
     # Main loop
     while True:
@@ -49,7 +53,6 @@ def roll_dice(d=None, t=None, r=None):
 
         # If user chooses to change parameters
         if after_results == 'c':
-
             dice, total_side = get_dice_input()
 
         # If user chooses to repeat
@@ -61,4 +64,4 @@ def roll_dice(d=None, t=None, r=None):
             quit(8)
 
 
-roll_dice(d=10, t=6)
+roll_dice()
