@@ -24,10 +24,6 @@ class ByteDyce:
         self.total_sides = 0  # Stores the current number of dice sides
         self.current_sim = []  # Stores the results of current simulation
 
-    # def __del__(self):
-    #     self.simulation_to_file()
-    #     quit(0)
-
     def find_max_dice(self, new, current):  # Stores highest number of dice simulated
         self.max_dice = new if new > current else current
 
@@ -38,7 +34,7 @@ class ByteDyce:
         self.results[self.simulations_performed] = results, self.max_dice, self.max_sides
         self.simulations_performed += 1
 
-    def print_results(self):
+    def print_results(self):        # Prints results to terminal
         print(f"\nHighest number of dice rolled: {self.max_dice}\n"
               f"Highest number of sides per dice: {self.max_sides}\n")
 
@@ -49,9 +45,8 @@ class ByteDyce:
                   f"Sides per dice: {self.results[key][2]}")
         print()
 
-    def get_dice_input(self):
-        # Total number of dice
-        dice = input("\nHow many dice would you like to roll?:\n")
+    def get_dice_input(self):       # Grabs input from user via terminal
+        dice = input("\nHow many dice would you like to roll?:\n")      # Total number of dice
 
         # Input verification to ensure user provides a number
         while not dice.isnumeric():

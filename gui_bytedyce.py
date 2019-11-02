@@ -14,8 +14,12 @@ status = 'Beta'
 
 def run_simulation():
     program.dice = int(d_input.get())
+    program.find_max_dice(program.dice, program.max_dice)
     program.total_sides = int(t_input.get())
-    results.insert(1, [randint(1, int(program.total_sides)) for i in range(program.dice)])
+    program.find_max_sides(program.total_sides, program.max_sides)
+    program.current_sim = [randint(1, int(program.total_sides)) for i in range(program.dice)]
+    results.insert(1, program.current_sim)
+    program.store_results(program.current_sim)
 
 
 def clear_results():
@@ -69,17 +73,17 @@ clrButton = tkinter.Button(optionsFrame, text='Clear Results', command=clear_res
 clrButton.grid(row=1, rowspan=2, column=4, sticky='nsew')
 
 # Weights - Rows
-mainWindow.rowconfigure(0, weight=10)
-mainWindow.rowconfigure(1, weight=100)
-mainWindow.rowconfigure(2, weight=100)
-mainWindow.rowconfigure(3, weight=100)
-mainWindow.rowconfigure(4, weight=100)
-mainWindow.rowconfigure(5, weight=10)
+mainWindow.rowconfigure(0, weight=10)       # Border
+mainWindow.rowconfigure(1, weight=100)      # Header
+mainWindow.rowconfigure(2, weight=100)      # Options #1
+mainWindow.rowconfigure(3, weight=100)      # Options #2
+mainWindow.rowconfigure(4, weight=100)      # Results Box
+mainWindow.rowconfigure(5, weight=10)       # Border
 
 # Weights - Columns
-mainWindow.columnconfigure(0, weight=10)
-mainWindow.columnconfigure(1, weight=100)
-mainWindow.columnconfigure(2, weight=10)
+mainWindow.columnconfigure(0, weight=10)    # Border
+mainWindow.columnconfigure(1, weight=100)   # Content
+mainWindow.columnconfigure(2, weight=10)    # Border
 
 # ========================================== GUI END =======================================
 
@@ -87,3 +91,5 @@ program = ByteDyce()
 
 
 mainWindow.mainloop()
+
+program.simulation_to_file()
