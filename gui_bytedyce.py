@@ -18,6 +18,11 @@ def run_simulation():
     results.insert(1, [randint(1, int(program.total_sides)) for i in range(program.dice)])
 
 
+def clear_results():
+    results.delete(0, 'end')
+    results.insert(0, 'Results: ')
+
+
 # ============================================= GUI START =============================================
 # MAIN WINDOW
 mainWindow = tkinter.Tk()
@@ -30,39 +35,46 @@ header.grid(row=1, column=1, sticky='nsew')
 
 # Options Frame
 optionsFrame = tkinter.LabelFrame(mainWindow, text='Options')
-optionsFrame.grid(row=2, column=1, sticky='nsew')
+optionsFrame.grid(row=2, column=1, sticky='')
 
 # Dice Label
 d_label = tkinter.Label(optionsFrame, text='# Dice to roll: ')
-d_label.grid(row=1, column=1, sticky='w')
+d_label.grid(row=1, column=1, sticky='e')
 
 # Dice Input
 d_input = tkinter.Entry(optionsFrame)
-d_input.grid(row=1, column=2, sticky='e')
+d_input.grid(row=1, column=2, sticky='w')
+d_input.insert(0, '1')
 
 # Sides Label
 t_label = tkinter.Label(optionsFrame, text='# of Sides per Dice: ')
-t_label.grid(row=2, column=1, sticky='w')
+t_label.grid(row=2, column=1, sticky='e')
 
 # Sides Input
 t_input = tkinter.Entry(optionsFrame)
-t_input.grid(row=2, column=2, sticky='e')
+t_input.grid(row=2, column=2, sticky='w')
+t_input.insert(0, '6')
 
 # Roll the Dice Button
 rtd_label = tkinter.Button(optionsFrame, text='Roll the Dice', command=run_simulation)
-rtd_label.grid(row=1, rowspan=2, column=3, sticky='nsew')
+rtd_label.grid(row=1, rowspan=2, column=3, sticky='nse')
 
 # Results Box
 results = tkinter.Listbox(mainWindow)
-results.grid(row=3, rowspan=2, column=1, sticky='ew')
+results.grid(row=3, column=1, sticky='nsew')
+results.insert(0, 'Results: ')
 
+# Clear Button
+clrButton = tkinter.Button(optionsFrame, text='Clear Results', command=clear_results)
+clrButton.grid(row=1, rowspan=2, column=4, sticky='nsew')
 
 # Weights - Rows
 mainWindow.rowconfigure(0, weight=10)
 mainWindow.rowconfigure(1, weight=100)
 mainWindow.rowconfigure(2, weight=100)
-mainWindow.rowconfigure(3, weight=50)
-mainWindow.rowconfigure(4, weight=10)
+mainWindow.rowconfigure(3, weight=100)
+mainWindow.rowconfigure(4, weight=100)
+mainWindow.rowconfigure(5, weight=10)
 
 # Weights - Columns
 mainWindow.columnconfigure(0, weight=10)
